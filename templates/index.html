@@ -203,7 +203,20 @@
 
 
     <script>
+        let direkt_dolgozo = {{ direkt_dolgozo | safe }};
+        console.log(direkt_dolgozo);
 
+        let direkt_koltsegviselo = {{ direkt_koltsegviselo | safe }};
+        console.log(direkt_koltsegviselo);
+
+        let muvezeto = {{ muvezeto | safe }};
+        console.log(muvezeto);
+
+        let egyeb = {{ egyeb | safe }};
+        console.log(egyeb);
+
+        let osszesitett = {{ osszesitett | safe }};
+        console.log(osszesitett);
 
     </script>
 
