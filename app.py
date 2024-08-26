@@ -21,14 +21,15 @@ def hello_world():  # put application's code here
 
     with open("data/5_Osszesitett.json", 'r', encoding='utf-8') as file:
         summarized_js = json.load(file)
-
+    summarized_item_keys_list = list(summarized_js[0].keys())[3:]
 
     return render_template('index.html',
                            direct_employee=direct_employee_js,
                            direct_costholder=direct_costholder_js,
                            prodleader=prodleader_js,
                            other=other_js,
-                           summarized=summarized_js
+                           summarized=summarized_js,
+                           summarized_item_keys=summarized_item_keys_list
                            )
 
 

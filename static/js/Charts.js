@@ -125,6 +125,107 @@ function fillTable(data, id) {
 }
 
 
+function drawBubblePlot(data, x, y, bubbleSize, bubbleColor,bubblesTitle, id) {
+    let svgToRemove = d3.select(id).select("svg");
+    svgToRemove.remove();
+
+    // Define the margins and dimensions of the chart
+    const margin = {top: 20, right: 20, bottom: 30, left: 50};
+    const width = 700 - margin.left - margin.right;
+    const height = 700 - margin.top - margin.bottom;
+
+// PCA Scatter plot
+    var pca_svg = d3.select(id)
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var max_bubbleSize = d3.max(data, function (d) {
+                    return d[bubbleSize];
+                });
+    var max_bubbleColor = d3.max(data, function (d) {
+                    return d[bubbleColor];
+                });
+
+// Define x and y scales
+    var pca_xScale = d3.scaleLinear()
+        .domain([0,
+                d3.max(data, function (d) {
+                    return d[x];
+                })])
+        .range([0, width]);
+
+    var pca_yScale = d3.scaleLinear()
+        .domain([0,
+                d3.max(data, function (d) {
+                    return d[y];
+                })])
+        .range([height, 0]);
+
+    pca_svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(pca_xScale));
+
+    pca_svg.append("g")
+        .call(d3.axisLeft(pca_yScale));
+
+
+    pca_svg.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", d => pca_xScale(d[x]))
+        .attr("cy", d => pca_yScale(d[y]))
+        .on("mouseover", function (d) {
+            // Set a variable on click of a circle
+            //highlightPoint(d.target.id);
+        })
+        .attr("id", function (d) {
+            return d["ID"];
+        })
+        .attr("r", function (d) {
+            // Set the "r" attribute based on the condition
+            if (bubbleSize !== "No Selection") {
+                var bubbleS = d[bubbleSize] / max_bubbleSize * 100;
+                if (bubbleS < 25) {
+                    return 2;
+                } else if (25 <= bubbleS && bubbleS < 50) {
+                    return 4;
+                } else if (50 <= bubbleS && bubbleS < 75) {
+                    return 8;
+                } else {
+                    return 12;
+                }
+            } else {
+                return 4;
+            }
+        })
+        .style("fill", function (d) {
+            if (bubbleColor !== "No Selection") {
+                var bubbleC = d[bubbleColor] / max_bubbleColor * 100;
+                if (bubbleC < 25) {
+                    return  "#d9ed92";
+                } else if (25 <= bubbleC && bubbleC < 50) {
+                    return  "#76c893";
+                } else if (50 <= bubbleC && bubbleC < 75) {
+                    return  "#1a759f";
+                } else {
+                    return  "#184e77";
+                }
+            } else {
+                return mainColor;
+            }
+
+            return color;
+        })
+        .style("opacity", 0.7)
+        .append("title")
+        .text(d => d[bubblesTitle]);
+}
+
+
 
 function summarizeJSON(items, excludeKeys){
     // Initialize an empty summary object
