@@ -1,6 +1,6 @@
 function drawBarchart(data, x, y, id, number_of_bars, bar_id, min_is_null = 0) {
 
-
+    data = data.sort((a, b) => b[y] - a[y]).slice(0, number_of_bars);
 // Set the dimensions and margins of the chart .node().parentNode.clientWidth
     let width = document.getElementsByClassName("diagram-container")[0].offsetWidth - 30;
 
