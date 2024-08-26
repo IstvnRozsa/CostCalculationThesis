@@ -20,7 +20,7 @@
 {% block body %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">&#128214; RI: Önköltségszámítási modell</a>
+            <a class="navbar-brand" href="#">&#128214; RI: Cost calculation model</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -41,15 +41,14 @@
         <div class="row" style="margin: auto">
             <div class="col col-sm-4 sticky-column">
                 <div class="sticky-top">
-                    <h1 id="uni-rankings">&#x1F3DB;&#xFE0F; Direkt költségek 1</h1>
-                    <p>költségviselők alapján</p>
+                    <h1 id="uni-rankings">&#x1F3DB;&#xFE0F; 2. Kölcsönzött munkaerő</h1>
+                    <p>Ebben a szekcióban a kölcsönzött munkaerők bérét elemezhetjük. A felosztás alapja 2 féle lehet: tényidő alapú vagy eddig felmerült költség alapú.</p>
                     <div class="alert alert-primary" role="alert">
 
-                        <h6>Felosztott költségek</h6>
+                        <h6>Felosztandó költségek:</h6>
                         <ul>
-                            <li>Bérköltség</li>
-                            <li>Bérjárulék</li>
-                            <li>Egyéb</li>
+                            <li>Munkaerő kölcsönzés bér költsége</li>
+                            <li>Munkaerő kölcsönzési jutalék</li>
                         </ul>
                     </div>
                 </div>
@@ -57,58 +56,24 @@
             <div class="col col-sm-8" id="diagrams-section-1">
 
                 <div class="diagram-container">
-                    <h2>&#x1F6A9; TOP 10 Countries</h2>
-                    <p>by selected continent and selected score type.</p>
-                    <div id="bar-chart-location"></div>
+                    <h2>&#x1F6A9; Felosztott költségek</h2>
+                    <p>A 2. körben felosztott kölcsönzött munkaerő költségek összege.</p>
+                    <div id="direct_employee_bar_chart"></div>
                 </div>
+
+
                 <div class="diagram-container">
-                    <h2>&#x1F3E2; TOP 10 Universities</h2>
-                    <p>by selected continent, selected country and selected score type.</p>
-                    <div id="bar-chart-universities"></div>
-                </div>
-                <div class="diagram-container">
-                    <h2>&#x1F5FA; Universities on the map</h2>
-                    <p>Depending on the university's overall score, the icon size and color change.</p>
-                    <ul class="nav nav-tabs" id="myTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="text-tab" data-bs-toggle="tab" href="#text-content"
-                               role="tab"
-                               aria-controls="text-content" aria-selected="true">Map</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="table-tab" data-bs-toggle="tab" href="#table-content" role="tab"
-                               aria-controls="table-content" aria-selected="false">Table format</a>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content" id="myTabsContent">
-
-
-                        <!-- Tab 1: Map Content -->
-                        <div class="tab-pane fade show active" id="text-content" role="tabpanel"
-                             aria-labelledby="text-tab">
-                            <div class="p-3">
-                                <!-- Map content goes here -->
-                                <!--<div id="world-map"></div>-->
-                                <div id="uni-map"></div>
-                            </div>
-                        </div>
-
-                        <!-- Tab 2: Table Content -->
-                        <div class="tab-pane fade" id="table-content" role="tabpanel"
-                             aria-labelledby="table-tab">
-                            <div class="table-container">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="university-table">
-                                        <thead class="thead-dark"></thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
+                    <h2>&#x1F50E; Kölcsönzött munkaerő költségeinek analitikája</h2>
+                    <p>A táblázat részletesen tartalmazza az összes cikkre osztott munkaerő kölcsönzés költségét.</p>
+                    <div class="table-container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="direct_employee_table">
+                                <thead class="thead-dark"></thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -117,14 +82,16 @@
         <div class="row" style="margin: auto">
             <div class="col col-sm-4 sticky-column">
                 <div class="sticky-top">
-                    <h1 id="countries-comparison">&#x2696;&#xFE0F; Direkt költségek 2</h1>
-                    <p>kölcsönzött dolgozók alapján</p>
+                    <h1 id="countries-comparison">&#x2696;&#xFE0F; 1. Saját munkavállalók</h1>
+                    <p>Ebben a szekcióban a saját munkavállalók költségfelosztását elemezhetjük.</p>
                     <div class="alert alert-primary" role="alert">
 
-                        <h6>Felosztott költségek</h6>
+                        <h6>Felosztott költségek:</h6>
                         <ul>
-                            <li>Munkaerő kölcsönzés bér ktg.</li>
-                            <li>Munkaerő kölcsönzési jutalék</li>
+                            <li>Bérköltség(54)</li>
+                            <li>Bérjárulék(56)</li>
+                            <li>Egyéb(52+53+57)</li>
+                            <li>Rezsi anyag(51)</li>
 
                         </ul>
                     </div>
@@ -132,23 +99,65 @@
                 </div>
             </div>
             <div class="col col-sm-8">
+
                 <div class="diagram-container">
-                    <h2 id="header-country1"></h2>
-                    <div id="top-unis-chart1"></div>
+                    <h2>&#x1F6A9; Felosztott költségek</h2>
+                    <p>Az 1. körben felosztott saját munkavállalók költségének összege.</p>
+
+                    <div id="direct_holder_bar_chart"></div>
                 </div>
                 <div class="diagram-container">
-                    <h2 id="header-country2"></h2>
-                    <div id="top-unis-chart2"></div>
+                    <h2>&#x1F50E; Saját munkavállalók bérköltség felosztásának analitikája</h2>
+                    <p>....</p>
+                    <div class="table-container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="direct_cost_holder_table">
+                                <thead class="thead-dark"></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row" style="margin: auto">
+            <div class="col col-sm-4 sticky-column">
+                <div class="sticky-top">
+                    <h1 id="public-spending">&#x1F4B5; 3. Művezetők bére</h1>
+                    <p>Ebben a szekcióban a művezetők béreinek költségfelosztását elemezhetjük.</p>
+                    <div class="alert alert-primary" role="alert">
+                        <h6>Felosztott költségek:</h6>
+                        <ul>
+                            <li>Bérköltség(54)</li>
+                            <li>Bérjárulék(56)</li>
+                            <li>Egyéb(52+53+54)</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col col-sm-8">
                 <div class="diagram-container">
-                    <h2>&#x1F4B5; Public spending on education as a share of GDP</h2>
-                    <p>Total general government expenditure on education (all levels of government and all levels of
-                        education),given as a share of GDP.</p>
-                    <ul>
-                        <li id="country1-text"></li>
-                        <li id="country2-text"></li>
-                    </ul>
-                    <div id="uni-spendings-lineplot"></div>
+                    <h2>&#x1F6A9; Felosztott költségek</h2>
+                    <p>A 3. körben felosztott művezetők költségeinek összege.</p>
+
+                    <div id="leader_bar_chart"></div>
+                </div>
+
+
+                <div class="diagram-container">
+                    <h2>&#x1F50E; Művezetők költség felosztásának analitikája</h2>
+                    <p>....</p>
+                    <div class="table-container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="prod_leader_table">
+                                <thead class="thead-dark"></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,14 +165,22 @@
         <div class="row" style="margin: auto">
             <div class="col col-sm-4 sticky-column">
                 <div class="sticky-top">
-                    <h1 id="public-spending">&#x1F4B5; Művezetők bére</h1>
-                    <p>..</p>
+                    <h1 id="public-spending">&#x1F4B5; 4. Egyéb költségek</h1>
+                    <p>Ebben a szekcióban az összes gyártáshoz kapcsolódó, egyéb költségek költségfelosztását elemezhetjük.</p>
                     <div class="alert alert-primary" role="alert">
-                        <h6>Felosztott költségek</h6>
+                        <h6>Felosztott költségek:</h6>
                         <ul>
-                            <li>Áram</li>
-                            <li>Viz</li>
-                            <li></li>
+                            <li>Szerszám, alkatrész (5121)</li>
+                            <li>Áramdíj költség (513)</li>
+                            <li>Vízdíj (514)</li>
+                            <li>Gázdíj költsége (515)</li>
+                            <li>Bérleti díj (522)</li>
+                            <li>Karbantartás költsége (524)</li>
+                            <li>Értékcsökkenés költsége (57)</li>
+                            <li>Bérköltség ktgh (54)</li>
+                            <li>Bérjárulékok ktgh (56)</li>
+                            <li>Munkaerő kölcsönzés bér ktg. (5298)</li>
+                            <li>Munkaerő kölcsönzés jutalék ktg (5298)</li>
                         </ul>
                     </div>
 
@@ -171,27 +188,73 @@
             </div>
             <div class="col col-sm-8">
                 <div class="diagram-container">
-                    <h2>&#x1F4B5; Egyéb költségek</h2>
+                    <h2>&#x1F6A9; Felosztott költségek</h2>
+                    <p>A 4. körben felosztott egyéb költségek összegei.</p>
+
+                    <div id="other_bar_chart"></div>
+                </div>
+
+
+                <div class="diagram-container">
+                    <h2>&#x1F50E; Egyéb költségek felosztásának analitikája</h2>
+                    <p>....</p>
+                    <div class="table-container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="other_table">
+                                <thead class="thead-dark"></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row" style="margin: auto">
+            <div class="col col-sm-4 sticky-column">
+                <div class="sticky-top">
+                    <h1 id="public-spending">&#x1F4B5; 5. Összefoglaló</h1>
+                    <p>A...</p>
+                    <div class="alert alert-primary" role="alert">
+                        <h6>Az Önköltség számítás során felosztott költségek:</h6>
+                        <ul>
+                            <li>Bérköltségek(54)</li>
+                            <li>Bérjárulékok(56)</li>
+                            <li>Egyéb(52+53+57)</li>
+                            <li>Munkaerő kölcsönzés bér ktg. (5298)</li>
+                            <li>Munkaerő kölcsönzés jutalék ktg.(5298)</li>
+                            <li>Rezsi anyag(51)</li>
+                            <li>Szerszám, alkatrész(5121)</li>
+                            <li>Áramdíj költség(513)</li>
+                            <li>Vízdíj(514)</li>
+                            <li>Gázdíj(515)</li>
+                            <li>Bérleti díj(522)</li>
+                            <li>Karbantartás költsége(524)</li>
+                            <li>Értékcsökkenés költsége(57)</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col col-sm-8">
+                <div class="diagram-container">
+                    <h2>&#x1F4B5; Összes felosztott költség</h2>
                     <p>...</p>
-                    <div class="row" style="padding-top: 0">
-                        <div class="col-4"></div>
-                        <div class="col-4 alert alert-secondary" role="alert">
-                            <h6>Selected countries</h6>
-                            <ul id="labels-div">
-                            </ul>
+                    <div id="summary_bar_chart"></div>
+                </div>
+
+
+                <div class="diagram-container">
+                    <h2>&#x1F5FA; A teljes költség felosztás analitikája</h2>
+                    <p>....</p>
+                    <div class="table-container">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="summarized_table">
+                                <thead class="thead-dark"></thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                     </div>
-
-                    <div id="countries-line-plot"></div>
-                </div>
-                <div class="diagram-container">
-                    <h2>&#x1F4B5; Public spending on education Map</h2>
-                    <p>Selected year: 2016. Total general government expenditure on education (all levels of
-                        government
-                        and
-                        all levels of
-                        education),given as a share of GDP.</p>
-                    <div id="world-map-spending" style="width: 900px; height: 500px;"></div>
                 </div>
             </div>
         </div>
@@ -203,21 +266,30 @@
 
 
     <script>
-        let direkt_dolgozo = {{ direkt_dolgozo | safe }};
-        console.log(direkt_dolgozo);
+        let directEmployee = {{ direct_employee | safe }};
+        console.log(directEmployee);
 
-        let direkt_koltsegviselo = {{ direkt_koltsegviselo | safe }};
-        console.log(direkt_koltsegviselo);
+        let directCostHolder = {{ direct_costholder | safe }};
+        console.log(directCostHolder);
 
-        let muvezeto = {{ muvezeto | safe }};
-        console.log(muvezeto);
+        let prodLeader = {{ prodleader | safe }};
+        console.log(prodLeader);
 
-        let egyeb = {{ egyeb | safe }};
-        console.log(egyeb);
+        let other = {{ other | safe }};
+        console.log(other);
 
-        let osszesitett = {{ osszesitett | safe }};
-        console.log(osszesitett);
+        let summarized = {{ summarized | safe }};
+        console.log(summarized);
 
+        const mainColor = "#007bff";
+        const secondaryColor = "#542E71";
+        const highlightColor = "#FF5714";
+        const secondaryColor2 = "#9C9C9C";
     </script>
-
+    <script src="../static/js/Charts.js"></script>
+    <script src="../static/js/1_DirectCosts/DirectCosts1.js"></script>
+    <script src="../static/js/2_DirectCosts/DirectCosts2.js"></script>
+    <script src="../static/js/3_LeaderCosts/LeaderCosts.js"></script>
+    <script src="../static/js/4_OtherCosts/OtherCosts.js"></script>
+    <script src="../static/js/5_Summary/CostSummary.js"></script>
 {% endblock %}
