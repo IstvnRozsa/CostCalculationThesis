@@ -11,6 +11,7 @@ function drawCostSummaryCharts() {
     fillTable(summarized, "#summarized_table");
     sumKeys(summarized,["Összes költség"],"#all_summarized");
     drawBubblePlot(summarized, selectedxFeature, selectedyFeature,selectedsFeature,selectedcFeature,"GYR-Cikknév","#summary_bubble_plot");
+    createBubbleChart(summarized, "#summary_items_bubble", "GYR-Cikkszám", "Összes költség", 25);
 }
 drawCostSummaryCharts();
 

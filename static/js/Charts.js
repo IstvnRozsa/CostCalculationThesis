@@ -86,7 +86,6 @@ function drawBarchart(data, x, y, id, number_of_bars, bar_id, min_is_null = 0) {
 
 
 function fillTable(data, id) {
-
     // Select the table element
     const table = d3.select(id);
     table.select("thead").remove();
@@ -224,6 +223,98 @@ function drawBubblePlot(data, x, y, bubbleSize, bubbleColor,bubblesTitle, id) {
         .style("opacity", 0.7)
         .append("title")
         .text(d => d[bubblesTitle]);
+}
+
+function createBubbleChart(data, id, nameKey, valueKey, numberOfBubbles) {
+
+    data = data.sort((a, b) => b[valueKey] - a[valueKey]).slice(0, numberOfBubbles);
+    // Set the dimensions and margins of the graph
+    const width = document.getElementsByClassName("diagram-container")[1].offsetWidth - 30;
+    const height = 550;
+
+    // Select the container and append an SVG element
+    let svg = d3.select(id)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(0,0)");
+
+    // Create a scale for bubble sizes
+    const sizeScale = d3.scaleLinear()
+        .domain([d3.min(data, d => d[valueKey]), d3.max(data, d => d[valueKey])]) // Domain based on the data
+        .range([25, 65]); // Size range of the bubbles
+
+    // Create a simulation for the bubbles
+    const simulation = d3.forceSimulation()
+        .force("center", d3.forceCenter(width / 2, height / 2)) // Centering the bubbles
+        .force("charge", d3.forceManyBody().strength(0.5)) // Force to repel bubbles from each other
+        .force("collision", d3.forceCollide().radius(d => sizeScale(d[valueKey]) + 1)) // Collision detection between bubbles
+        .nodes(data)
+        .on("tick", ticked);
+
+    // Create a group for each bubble (circle and text)
+    const node = svg.selectAll("g")
+        .data(data)
+        .enter()
+        .append("g")
+        .attr("transform", d => `translate(${d.x}, ${d.y})`);
+
+    // Create the bubbles (circles)
+    node.append("circle")
+        .attr("r", d => sizeScale(d[valueKey]))
+        .attr("fill", mainColor);
+
+    // Add the name labels inside the bubbles
+    node.append("text")
+        .attr("dy", "-0.3em")
+        .style("text-anchor", "middle")
+        .style("font-size", d => `${sizeScale(d[valueKey]) / 3}px`)
+        .style("fill", "black")
+        .text(d => d[nameKey].substring(0, 6));
+
+    // Add the value labels inside the bubbles
+    node.append("text")
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .style("font-size", d => `${sizeScale(d[valueKey]) / 3}px`)
+        .style("fill", "white")
+        .text(d => d3.format(",.0f")(d[valueKey]));
+
+    // Add hover effects to show the ID near the bubble
+    node.on("mouseover", function(event, d) {
+            d3.select(this).select("circle").attr("fill", highlightColor); // Change color on hover
+
+
+            // Add or show a text element to display the ID near the bubble
+            let hoverLabel = svg.selectAll(".hover-label").data([d]);
+
+            hoverLabel.enter()
+                .append("text")
+                .attr("class", "hover-label")
+                .merge(hoverLabel)
+                .attr("x", d.x)
+                .attr("y", d.y - sizeScale(d[valueKey]) - 10) // Position the text above the bubble
+                .style("text-anchor", "middle")
+                .style("font-size", "25px")
+                .style("fill", "black")
+                .text(d[nameKey]);
+
+            hoverLabel.exit().remove();
+        })
+        .on("mouseout", function(event, d) {
+            d3.select(this).select("circle").attr("fill", mainColor); // Revert color on unhover
+
+
+            // Remove the hover label when the mouse moves away
+            svg.selectAll(".hover-label").remove();
+        });
+
+    // Update the positions of the bubbles
+    function ticked() {
+        node
+            .attr("transform", d => `translate(${d.x}, ${d.y})`);
+    }
 }
 
 
