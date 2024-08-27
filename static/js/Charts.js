@@ -2,7 +2,7 @@ function drawBarchart(data, x, y, id, number_of_bars, bar_id, min_is_null = 0) {
 
     data = data.sort((a, b) => b[y] - a[y]).slice(0, number_of_bars);
 // Set the dimensions and margins of the chart .node().parentNode.clientWidth
-    let width = document.getElementsByClassName("diagram-container")[0].offsetWidth - 30;
+    let width = document.getElementsByClassName("diagram-container")[1].offsetWidth - 30;
 
     let height = 260;
     let margin = {top: 20, right: 0, bottom: 30, left: 40};
@@ -178,12 +178,13 @@ function drawBubblePlot(data, x, y, bubbleSize, bubbleColor,bubblesTitle, id) {
         .append("circle")
         .attr("cx", d => pca_xScale(d[x]))
         .attr("cy", d => pca_yScale(d[y]))
-        .on("mouseover", function (d) {
+        .on("click", function (d) {
             // Set a variable on click of a circle
             //highlightPoint(d.target.id);
+            console.log(d.target.id);
         })
         .attr("id", function (d) {
-            return d["ID"];
+            return d["GYR-Cikkszám"];
         })
         .attr("r", function (d) {
             // Set the "r" attribute based on the condition
@@ -258,6 +259,27 @@ function summarizeJSON(items, excludeKeys){
 
 
 }
+
+
+function sumKeys(jsonList, keys, id) {
+    // Initialize a variable to store the total sum
+    let totalSum = 0;
+
+    // Iterate through each JSON object in the list
+    jsonList.forEach(item => {
+        // Iterate through each key to sum
+        keys.forEach(key => {
+            // Check if the key exists in the item and if the value is a number
+            if (item.hasOwnProperty(key) && typeof item[key] === 'number') {
+                totalSum += item[key];
+            }
+        });
+    });
+    const formattedValue = d3.format(",")(totalSum) + " HUF";
+    // Select the <h1> element by ID and update its text content
+    d3.select(id).text(formattedValue);
+}
+
 
 
 

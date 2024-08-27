@@ -54,6 +54,10 @@
 
                         </ul>
                     </div>
+                    <div class="diagram-container" style="margin-top: 10px;width: 70%;">
+                        <p>Összes felosztott saját munkavállalók bére:</p>
+                        <h2 id="all_direct_holder">100.000 HUF</h2>
+                    </div>
 
                 </div>
             </div>
@@ -93,6 +97,10 @@
                             <li>Munkaerő kölcsönzés bér költsége</li>
                             <li>Munkaerő kölcsönzési jutalék</li>
                         </ul>
+                    </div>
+                    <div class="diagram-container" style="margin-top: 10px;width: 70%;">
+                        <p>Összes felosztott munkaerő kölcsönzés:</p>
+                        <h2 id="all_direct_employee">100.000 HUF</h2>
                     </div>
                 </div>
             </div>
@@ -134,7 +142,10 @@
                             <li>Egyéb(52+53+54)</li>
                         </ul>
                     </div>
-
+                    <div class="diagram-container" style="margin-top: 10px;width: 70%;">
+                        <p>Összes felosztott művezető bér:</p>
+                        <h2 id="all_leader">100.000 HUF</h2>
+                    </div>
                 </div>
             </div>
             <div class="col col-sm-8">
@@ -182,6 +193,10 @@
                             <li>Munkaerő kölcsönzés jutalék ktg (5298)</li>
                         </ul>
                     </div>
+                    <div class="diagram-container" style="margin-top: 10px;width: 70%;">
+                        <p>Összes felosztott egyéb költség:</p>
+                        <h2 id="all_other">100.000 HUF</h2>
+                    </div>
 
                 </div>
             </div>
@@ -213,7 +228,7 @@
             <div class="col col-sm-4 sticky-column">
                 <div class="sticky-top">
                     <h1 id="public-spending">&#x1F4B5; 5. Összefoglaló</h1>
-                    <p>A...</p>
+                    <p>Az 5. szekcióban részletesen elemezzük az utókalkuláció során cikkekre lebontott összes költséget.</p>
                     <div class="alert alert-primary" role="alert">
                         <h6>Az Önköltség számítás során felosztott költségek:</h6>
                         <ul>
@@ -231,6 +246,10 @@
                             <li>Karbantartás költsége(524)</li>
                             <li>Értékcsökkenés költsége(57)</li>
                         </ul>
+                    </div>
+                    <div class="diagram-container" style="margin-top: 10px; width: 70%;">
+                        <p>Összes felosztott költség:</p>
+                        <h2 id="all_summarized">100.000 HUF</h2>
                     </div>
 
                 </div>
@@ -257,70 +276,70 @@
                 </div>
                 <div class="row">
                     <div class="col col-4">
-                        <h3>Features</h3>
+                        <h3>Költségek</h3>
                         <div class="form-group">
-                            <label for="combobox">Score X</label>
+                            <label for="combobox">X tengely</label>
                             <div class="input-group">
                                 <select id="combobox-x" class="selectpicker"></select>
                             </div>
-                            <label for="combobox">Score Y</label>
+                            <label for="combobox">Y tengely</label>
                             <div class="input-group">
                                 <select id="combobox-y" class="selectpicker"></select>
                             </div>
-                            <label for="combobox">Score for size</label>
+                            <label for="combobox">Buborék méret</label>
                             <div class="input-group">
                                 <select id="combobox-size" class="selectpicker"></select>
                             </div>
-                            <label for="combobox">Score for color</label>
+                            <label for="combobox">Buborék szín</label>
                             <div class="input-group">
                                 <select id="combobox-color" class="selectpicker"></select>
                             </div>
                         </div>
 
                         <div class="diagram-container" style="margin-top: 10px">
-                            <p>Color & Size Description</p>
+                            <p>Méret és szín magyarázat</p>
                             <svg width="400" height="80">
                                 <!-- Circle with radius 2 -->
                                 <circle cx="30" cy="40" r="2" stroke="black" stroke-width="2" fill="none"/>
-                                <text class="label-text" x="30" y="70">0-25</text>
+                                <text class="label-text" x="30" y="70">0-25%</text>
 
                                 <!-- Circle with radius 4 -->
                                 <circle cx="110" cy="40" r="4" stroke="black" stroke-width="2" fill="none"/>
-                                <text class="label-text" x="110" y="70">25-50</text>
+                                <text class="label-text" x="110" y="70">25-50%</text>
 
                                 <!-- Circle with radius 8 -->
                                 <circle cx="190" cy="40" r="8" stroke="black" stroke-width="2" fill="none"/>
-                                <text class="label-text" x="190" y="70"> 50-75</text>
+                                <text class="label-text" x="190" y="70"> 50-75%</text>
 
                                 <!-- Circle with radius 12 -->
                                 <circle cx="270" cy="40" r="12" stroke="black" stroke-width="2" fill="none"/>
-                                <text class="label-text" x="270" y="70">75+</text>
+                                <text class="label-text" x="270" y="70">75+%</text>
 
                             </svg>
                             <svg width="400" height="80">
                                 <!-- Circle with radius 2 -->
                                 <circle cx="30" cy="40" r="4" fill="#d9ed92"/>
-                                <text class="label-text" x="30" y="70">0-25</text>
+                                <text class="label-text" x="30" y="70">0-25%</text>
 
                                 <!-- Circle with radius 4 -->
                                 <circle cx="110" cy="40" r="4" fill="#76c893"/>
-                                <text class="label-text" x="110" y="70">25-50</text>
+                                <text class="label-text" x="110" y="70">25-50%</text>
 
                                 <!-- Circle with radius 8 -->
                                 <circle cx="190" cy="40" r="4" fill="#1a759f"/>
-                                <text class="label-text" x="190" y="70"> 50-75</text>
+                                <text class="label-text" x="190" y="70"> 50-75%</text>
 
                                 <!-- Circle with radius 12 -->
                                 <circle cx="270" cy="40" r="4" fill="#184e77"/>
-                                <text class="label-text" x="270" y="70">75+</text>
+                                <text class="label-text" x="270" y="70">75+%</text>
 
                             </svg>
                         </div>
                     </div>
                     <div class="col col-8">
                         <div class="diagram-container">
-                            <h2>&#x1F6A9; Scores correlation</h2>
-                            <p>by selected features.</p>
+                            <h2>&#x1F6A9; Bér korreláció</h2>
+                            <p>Kiválasztott dimenziók szerint.</p>
                             <div id="summary_bubble_plot"></div>
                         </div>
                     </div>
