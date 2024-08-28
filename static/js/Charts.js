@@ -366,7 +366,7 @@ function sumKeys(jsonList, keys, id) {
             }
         });
     });
-    const formattedValue = d3.format(",")(totalSum) + " HUF";
+    const formattedValue = d3.format(",.2f")(totalSum) + " HUF";
     // Select the <h1> element by ID and update its text content
     d3.select(id).text(formattedValue);
 }
