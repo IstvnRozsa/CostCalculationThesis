@@ -1,5 +1,5 @@
-let selectedxFeature = "";
-let selectedyFeature = "";
+let selectedxFeature = "Bérköltségek(54)";
+let selectedyFeature = "Bérköltségek(54)";
 let selectedsFeature = "No Selection";
 let selectedcFeature = "No Selection";
 
@@ -12,7 +12,10 @@ function drawCostSummaryCharts() {
     sumKeys(summarized,["Összes költség"],"#all_summarized");
     drawBubblePlot(summarized, selectedxFeature, selectedyFeature,selectedsFeature,selectedcFeature,"GYR-Cikknév","#summary_bubble_plot");
     createBubbleChart(summarized, "#summary_items_bubble", "GYR-Cikkszám", "Összes költség", 25);
+    d3.select("#summarized_filter_no").on("input", () => filterData('#summarized_filter_no',"#summarized_filter_name", "#summarized_table",summarized,"GYR-Cikkszám","GYR-Cikknév"));
+    d3.select("#summarized_filter_name").on("input", () => filterData('#summarized_filter_no',"#summarized_filter_name", "#summarized_table",summarized,"GYR-Cikkszám","GYR-Cikknév"));
 }
+
 drawCostSummaryCharts();
 
 

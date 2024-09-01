@@ -371,6 +371,26 @@ function sumKeys(jsonList, keys, id) {
     d3.select(id).text(formattedValue);
 }
 
+ function filterData(inputId1, inputId2, outputId, data, filterKey1, filterKey2) {
+            const filterText1 = d3.select(inputId1).property("value").toLowerCase();
+            const filterText2 = d3.select(inputId2).property("value").toLowerCase();
+
+            const filteredData = data.filter(item => {
+                if (!filterText1 && !filterText2) {
+                    return item;
+                }
+                else if(!filterText2){
+                    return item[filterKey1].toLowerCase().includes(filterText1);
+                }
+                else if(!filterText1){
+                    return  item[filterKey2].toLowerCase().includes(filterText2)
+                }else{
+                    return item[filterKey1].toLowerCase().includes(filterText1) && item[filterKey2].toLowerCase().includes(filterText2);
+                }
+
+            });
+            fillTable(filteredData, outputId); // Re-render the list with filtered data
+}
 
 
 
